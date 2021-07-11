@@ -1,0 +1,58 @@
+<h3 class="mb-2">  Foreign exchange calculator</h3>
+
+<form #f="ngForm">
+  <h5 class="m-3">Convert</h5>
+  <!--<label for="fromCurrency" class="form-label">Convert</label>-->
+
+  <div class="row g-5">
+    <div class="col-md-6">
+      <select name="fromCurrency"
+              class="form-select form-control"
+              [(ngModel)]="fromCurrency"
+              (change)="onFromCurrencyChanged(fromCurrency)">
+        <option value="" disabled>Select a currency</option>
+        <option *ngFor="let currency of fromCurrencies" [ngValue]="currency">
+          {{ currency }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <input type="text"
+             class="form-control"
+             name="fromAmount"
+             (input)="onFromAmountChange($event.target.value)"
+             (blur)="transformFromAmount($event)"
+             [(ngModel)]="fromAmount" />
+      <!--<p>Form value: {{ fromAmount | json }}</p>-->
+    </div>
+  </div>
+
+  <h5 class="m-3">Into</h5>
+
+  <div class="row g-5">
+    <div class="col-md-6">
+      <select name="toCurrency"
+              class="form-select form-control"
+              [(ngModel)]="toCurrency"
+              (change)="onToCurrencyChanged(toCurrency)">
+        <option value="" disabled>Select a currency</option>
+        <option *ngFor="let currency of toCurrencies" [ngValue]="currency">
+          {{ currency }}
+        </option>
+      </select>
+    </div>
+    <div class="col-md-6">
+
+      <input type="text"
+             class="form-control"
+             name="toAmount"
+             (input)="onToAmountChange($event.target.value)"
+             (blur)="transformToAmount($event)"
+             [(ngModel)]="toAmount" />
+    </div>
+  </div>
+</form>
+
+<!--<p>To value: {{ toAmount | json }}</p>-->
+
+<p *ngIf="exchangeRate > 0"  class="lead m-3 pt-1" >Exchange rate: 1 {{fromCurrency}} = {{exchangeRate}} {{toCurrency}}</p>

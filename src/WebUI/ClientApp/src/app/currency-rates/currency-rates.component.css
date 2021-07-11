@@ -1,0 +1,6 @@
+@media (max-width: 768px) {
+  .extra-Info-for-big-screen {
+    visibility: hidden;
+    display: none;
+  }
+}
